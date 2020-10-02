@@ -2,3 +2,5 @@ pandas
 plotly
 yfinance
 psutil
+python-dateutil
+kaleido
