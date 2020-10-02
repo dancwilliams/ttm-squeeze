@@ -49,9 +49,12 @@ for filename in os.listdir('datasets'):
 
     df['squeeze_on'] = df.apply(in_squeeze, axis=1)
 
-    if df.iloc[-3]['squeeze_on'] and not df.iloc[-1]['squeeze_on']:
-        print("{} is coming out the squeeze".format(symbol))
-        chart(df, symbol)
+    try:
+        if df.iloc[-3]['squeeze_on'] and not df.iloc[-1]['squeeze_on']:
+            print("{} is coming out the squeeze".format(symbol))
+            chart(df, symbol)
+    except:
+        pass
 
     # save all dataframes to a dictionary
     # we can chart individual names below by calling the chart() function
