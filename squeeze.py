@@ -50,8 +50,15 @@ for filename in os.listdir('datasets'):
     df['squeeze_on'] = df.apply(in_squeeze, axis=1)
 
     try:
-        if df.iloc[-3]['squeeze_on'] and not df.iloc[-1]['squeeze_on']:
+        if df.iloc[-5]['squeeze_on'] and not df.iloc[-1]['squeeze_on']:
             print("{} is coming out the squeeze".format(symbol))
+            chart(df, symbol)
+    except:
+        pass
+
+    try:
+        if df.iloc[-1]['squeeze_on'] and not df.iloc[-5]['squeeze_on']:
+            print("{} is going into the squeeze".format(symbol))
             chart(df, symbol)
     except:
         pass
@@ -59,25 +66,3 @@ for filename in os.listdir('datasets'):
     # save all dataframes to a dictionary
     # we can chart individual names below by calling the chart() function
     dataframes[symbol] = df
-
-
-#def chart(df, symbol):
-#    candlestick = go.Candlestick(x=df['Date'], open=df['Open'], high=df['High'], low=df['Low'], close=df['Close'])
-#    upper_band = go.Scatter(x=df['Date'], y=df['upper_band'], name='Upper Bollinger Band', line={'color': 'red'})
-#    lower_band = go.Scatter(x=df['Date'], y=df['lower_band'], name='Lower Bollinger Band', line={'color': 'red'})
-#
-#    upper_keltner = go.Scatter(x=df['Date'], y=df['upper_keltner'], name='Upper Keltner Channel', line={'color': 'blue'})
-#    lower_keltner = go.Scatter(x=df['Date'], y=df['lower_keltner'], name='Lower Keltner Channel', line={'color': 'blue'})
-#
-#    fig = go.Figure(data=[candlestick, upper_band, lower_band, upper_keltner, lower_keltner])
-#    fig.layout.xaxis.type = 'category'
-#    fig.layout.xaxis.rangeslider.visible = False
-#    fig.show()
-
-#    if not os.path.exists("images"):
-       # os.mkdir("images")
-
-#    fig.write_image("images/{}.jpeg".format(symbol))
-
-#df = dataframes['GOOGL']
-#chart(df, symbol)
